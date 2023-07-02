@@ -160,14 +160,14 @@ margin: auto;
 	height: 50px;
 	font-size: 1.2em;
 	border: none;
-	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
 }
 #contact label {
 	margin: 2em 0 1em 0;
 }
 #contact textarea {
 	border: none;
-	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
 }
 
 input[type="submit"]{
@@ -238,7 +238,7 @@ a{
 }
 
 form{
-	width: 50%;
+	width: 70%;
 	margin: 0 auto;
 	display: flex;
 	flex-direction: column;
@@ -261,24 +261,160 @@ form{
 	cursor: pointer;
 	transform: translateY(-100%);
 }
-.edit-container {
+.edit{
 	display: none;
+	background: white;
+	width: 800px;
+	height: 550px;
+	top: 50%;
+	transform: translateY(-50%);
 	position: fixed;
+	z-index: 111;
+}
+#iconClose{
+	z-index: 9999999;
+	position:absolute;
+	display: inline-block;
+cursor: pointer;
+	top: 10px;
+	right: 10px;
+	width: 15px;
+}
+#arrow{
+	z-index: 9999999;
+	position:absolute;
+	display: inline-block;
+cursor: pointer;
+	top: 10px;
+	left: 10px;
+	width: 15px;
+}
+
+  .overlay{
+	overflow: hidden;
+  }
+  .overlay::after {
+	content: "";
+	position: absolute;
+	background: #0000004a;
+	width: 200vw;
+	margin-left: -500px;
+	height: 450vh;
 	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background-color: rgba(0, 0, 0, 0.5);
-	z-index: 9999;
   }
-  
-  .edit-container p {
+  .edit h3{
 	text-align: center;
+	font-size: 1.2rem;
+	margin: 25px 0 0 0;
+  }
+ .edit-container{
+	display: flex;
+	flex-wrap: wrap;
+	position: relative;
+	width: 70%;
+	margin: 10px auto;
+ }
+ .edit-container img{
+	padding: 0 5px;
+ }
+ .edit-container p{
+	cursor: pointer;
+	margin: 15px 0 0 0;
+	font-size: 0.8rem;
+ }
+ .edit-container::after{
+	content: "";
+	position: absolute;
+	background: #00000041;
+	height: 1px;
+	width: 100%;
+	bottom: -20px;
+	left: 0;
+ }
+ .edit .ajouter{
+	font-family: 'Syne';
+	font-weight: 700;
 	color: white;
-	font-size: 20px;
-	margin-top: 20px;
-  }
-  
-  .overlay {
-	background-color: rgba(0, 0, 0, 0.2);
-  }
+	background-color: #1D6154;
+	border: 1px solid #1D6154;
+	padding: 5px;
+	margin : 60px auto 0 auto ;
+	width: 180px;
+	text-align: center;
+	border-radius: 60px ;
+ }
+
+ .supprimer{
+	color: #D65353;
+	text-align: center;
+ }
+
+
+ #premium{
+	display: none;
+ }
+ .ajoutPhoto{
+	background: #0acaa72d;
+	width: 100%;
+	margin: 15px auto 5px auto;
+	padding: 70px 0;
+	position: relative;
+ }
+.edit label{
+	border: inherit;
+	text-align: left;
+	color: inherit;
+	font-family: inherit;
+	padding: 10px 0;
+	margin: 5px 0 0 0;
+}
+
+.edit form input, .edit form select{
+	height: 50px;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+	
+	
+}
+
+ .edit form input:focus, .edit form select:focus{
+	outline: 1px solid rgba(0, 0, 0, 0.566);
+}
+.format{
+	position: absolute;
+	bottom: 10px;
+	left: 50%;
+	transform: translateX(-50%)!important;
+}
+.btn-photo{
+	position: absolute;
+	top: 65%;
+	left: 50%;
+	transform: translate(-50%,-50%)!important;
+	width: min-content;
+	white-space: nowrap;
+	color: #1D6154!important;
+	background: rgba(109, 123, 109, 0.32)!important;
+	padding: 10px 40px;
+	text-align: center!important;
+	border-radius: 30px;
+	cursor: pointer;
+}
+.ajoutPhoto p{
+	margin:0 auto;
+	width: min-content;
+	white-space: nowrap;
+}
+
+.galery-photo{
+	
+	position: absolute;
+	top: 10px;
+	left: 50%;
+	transform: translateX(-50%);
+}
+.galery-photo i {
+	font-size: 3rem;
+	color: rgba(128, 128, 128, 0.628);
+}

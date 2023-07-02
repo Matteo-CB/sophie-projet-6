@@ -1,0 +1,1 @@
+window.isLoggedIn = false;
