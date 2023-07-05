@@ -6,6 +6,7 @@ const edit = document.querySelector(".edit");
 const body = document.querySelector("body");
 const editContainer = document.querySelector(".edit-container");
 const token = localStorage.getItem("token");
+const portofolioTitle = document.querySelector('portofolio-title')
 var allId = [];
 let selectedFilter;
 let imgPath;
@@ -14,7 +15,8 @@ let initialEditContent;
 
 const bon = () => {
   body.classList.remove("overlay");
-  
+  const ecran = document.querySelector('.ecran')
+  ecran.style.display='none'
   edit.style.display = "none";
 };
 
@@ -303,9 +305,13 @@ radio.forEach((label) => {
   });
 });
 
+
 const premium = document.getElementById("premium");
 if (premium) {
   premium.addEventListener("click", () => {
+    
+    
+
     const suppAll = document.querySelector(".supprimer");
     if (suppAll) {
       suppAll.addEventListener("click", () => {
@@ -327,7 +333,8 @@ if (premium) {
     }
     body.classList.add("overlay");
     edit.style.display = "block";
-
+    const ecran = document.querySelector('.ecran')
+    ecran.style.display='block'
     const suppWork = document.querySelectorAll(".supp-img");
     suppWork.forEach((element) => {
       element.addEventListener("click", (event) => {
@@ -338,7 +345,4 @@ if (premium) {
   });
 }
 
-const overlay = document.querySelector(".overlay");
-overlay.addEventListener("click", () => {
-  body.classList.remove("overlay");
-});
+

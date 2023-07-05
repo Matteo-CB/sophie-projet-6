@@ -102,7 +102,7 @@ li:hover {
 #introduction {
 	display: flex;
 	align-items: center;
-	padding-bottom: 80px;
+	padding-bottom: 8cd b	0px;
 }
 #introduction figure {
 	flex: 1
@@ -111,6 +111,18 @@ li:hover {
 	display: block;
 	margin: auto;
 	width: 80%;
+}
+.ecran{
+	z-index: 655656565656565685;
+	display: none;
+	padding: 0;
+	margin: 0;
+	padding: 555555555;
+	width: 100vh!important;
+	position: absolute;
+	top: 1;
+	background:transparent;
+	height: 55000vh;
 }
 
 #introduction article {
