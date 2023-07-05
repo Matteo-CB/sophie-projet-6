@@ -14,7 +14,7 @@ let initialEditContent;
 
 const bon = () => {
   body.classList.remove("overlay");
-  edit.innerHTML = initialEditContent;
+  
   edit.style.display = "none";
 };
 
@@ -246,20 +246,19 @@ getWork()
     gallery.innerHTML = galleryHTML;
 
     var editContainerHTML = work
-      .map(
-        (e, index) =>
-          `
+      .map((e, index) => {
+        allId.push(e.id);
+        console.log(allId);
+        return `
         <div class='card-edit'>
-        <img width='80' src=${e.imageUrl} alt=${e.title}>
-        <div>
-        <img width='80' class='supp-img' id=${e.id} src='./assets/icons/trash-svgrepo-com.svg' alt='supprimer'>
+          <img width='80' src=${e.imageUrl} alt=${e.title}>
+          <div>
+            <img width='80' class='supp-img' id=${e.id} src='./assets/icons/trash-svgrepo-com.svg' alt='supprimer'>
+          </div>
+          <p>éditer</p>
         </div>
-        <p>éditer</p>
-      </div>
-        ` +
-          allId.push(e.id) +
-          console.log(allId)
-      )
+      `;
+      })
       .join("");
 
     editContainer.innerHTML = editContainerHTML;
@@ -307,6 +306,25 @@ radio.forEach((label) => {
 const premium = document.getElementById("premium");
 if (premium) {
   premium.addEventListener("click", () => {
+    const suppAll = document.querySelector(".supprimer");
+    if (suppAll) {
+      suppAll.addEventListener("click", () => {
+        const confirmed = window.confirm(
+          "Êtes-vous sûr de vouloir supprimer tous les éléments ?"
+        );
+        if (confirmed) {
+          deleteWorkAll(allId)
+            .then(() => {
+              console.log("All works deleted successfully.");
+              // Faire autre chose après la suppression de tous les éléments
+            })
+            .catch((error) => {
+              console.log("An error occurred during deletion:", error);
+              // Gérer les erreurs de suppression
+            });
+        }
+      });
+    }
     body.classList.add("overlay");
     edit.style.display = "block";
 
@@ -317,8 +335,6 @@ if (premium) {
         deleteWork(id);
       });
     });
-    const suppAll = document.querySelector("supprimer");
-    deleteWorkAll(allId);
   });
 }
 
