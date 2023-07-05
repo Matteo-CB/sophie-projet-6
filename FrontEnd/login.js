@@ -18,13 +18,19 @@ loginForm.addEventListener("submit", async (e) => {
 
     if (response.ok) {
       // Authentification réussie
+      const data = await response.json();
+      const token = data.token;
+
+      // Stocker le token dans le localStorage
+      localStorage.setItem("token", token);
+
       console.log("Authentification réussie !");
-      sessionStorage.setItem("isLoggedIn", true); // Stocker la valeur dans le localStorage
+      localStorage.setItem("isLoggedIn", true); // Stocker la valeur dans le sessionStorage
       window.location.href = "./index.html#work"; // Redirection vers index.html dans la même fenêtre
     } else {
       // Erreur d'authentification
       document.querySelector("#login p").textContent =
-        "Erreur dans l’identifiant ou le mot de passe";
+        "Erreur dans l'identifiant ou le mot de passe";
     }
     setTimeout(() => {
       document.querySelector("#login p").textContent = "";
@@ -36,3 +42,4 @@ loginForm.addEventListener("submit", async (e) => {
     );
   }
 });
+

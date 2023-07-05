@@ -183,6 +183,9 @@ input[type="submit"]{
 	border: none;
 
 }
+.unlock{
+	background: grey!important;
+}
 
 footer nav ul {
 	display: flex;
@@ -265,11 +268,11 @@ form{
 	display: none;
 	background: white;
 	width: 800px;
-	height: 550px;
+	height: 650px;
 	top: 50%;
 	transform: translateY(-50%);
 	position: fixed;
-	z-index: 111;
+	z-index: 99999999111;
 }
 #iconClose{
 	z-index: 9999999;
@@ -292,6 +295,7 @@ cursor: pointer;
 
   .overlay{
 	overflow: hidden;
+	
   }
   .overlay::after {
 	content: "";
@@ -300,6 +304,7 @@ cursor: pointer;
 	width: 200vw;
 	margin-left: -500px;
 	height: 450vh;
+	z-index: 54454;
 	top: 0;
   }
   .edit h3{
@@ -319,7 +324,7 @@ cursor: pointer;
  }
  .edit-container p{
 	cursor: pointer;
-	margin: 15px 0 0 0;
+	margin: 25px 0 0 0;
 	font-size: 0.8rem;
  }
  .edit-container::after{
@@ -354,10 +359,10 @@ cursor: pointer;
 	display: none;
  }
  .ajoutPhoto{
-	background: #0acaa72d;
+	background: #e8f1f6;
 	width: 100%;
 	margin: 15px auto 5px auto;
-	padding: 70px 0;
+	padding: 100px 0;
 	position: relative;
  }
 .edit label{
@@ -389,7 +394,7 @@ cursor: pointer;
 }
 .btn-photo{
 	position: absolute;
-	top: 65%;
+	top: 70%;
 	left: 50%;
 	transform: translate(-50%,-50%)!important;
 	width: min-content;
@@ -410,11 +415,30 @@ cursor: pointer;
 .galery-photo{
 	
 	position: absolute;
-	top: 10px;
+	top: 20px;
 	left: 50%;
 	transform: translateX(-50%);
 }
 .galery-photo i {
-	font-size: 3rem;
+	font-size: 4rem;
 	color: rgba(128, 128, 128, 0.628);
+}
+.card-edit{
+	position: relative;
+}
+.card-edit div{
+	top: 3px;
+	right: 9px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+	background: #000;
+	width: 30px;
+	border-radius: 10px;
+	height: 30px;
+}
+.supp-img{
+	width: 15px;
+	cursor: pointer;
 }

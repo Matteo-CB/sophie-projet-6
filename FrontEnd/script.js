@@ -5,55 +5,227 @@ const radio = document.querySelectorAll("label");
 const edit = document.querySelector(".edit");
 const body = document.querySelector("body");
 const editContainer = document.querySelector(".edit-container");
+const token = localStorage.getItem("token");
+var allId = [];
 let selectedFilter;
-
+let imgPath;
 let work;
-let initialEditContent; // Variable pour stocker le contenu initial de edit
+let initialEditContent;
+
+const bon = () => {
+  body.classList.remove("overlay");
+  edit.innerHTML = initialEditContent;
+  edit.style.display = "none";
+};
+
+const arrowReturn = () => {
+  console.log("rr");
+  edit.innerHTML = initialEditContent;
+};
+
 window.addEventListener("load", () => {
-  const isLoggedIn = sessionStorage.getItem("isLoggedIn");
+  const isLoggedIn = localStorage.getItem("isLoggedIn");
 
   if (isLoggedIn) {
     const premium = document.getElementById("premium");
     premium.style.display = "block";
   }
 });
+const deleteWork = (id) => {
+  fetch(`http://localhost:5678/api/works/${id}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  })
+    .then((response) => {
+      if (response.ok) {
+        console.log(`Work with ID ${id} deleted successfully.`);
+        // Faire quelque chose après la suppression réussie
+      } else {
+        console.log(`Failed to delete work with ID ${id}.`);
+        // Gérer l'échec de la suppression
+      }
+    })
+    .catch((error) => {
+      console.log("An error occurred:", error);
+      // Gérer les erreurs de la requête
+    });
+};
+const deleteWorkAll = (ids) => {
+  const deletePromises = ids.map((id) => {
+    return fetch(`http://localhost:5678/api/works/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    })
+      .then((response) => {
+        if (response.ok) {
+          console.log(`Work with ID ${id} deleted successfully.`);
+          // Faire quelque chose après la suppression réussie
+        } else {
+          console.log(`Failed to delete work with ID ${id}.`);
+          // Gérer l'échec de la suppression
+        }
+      })
+      .catch((error) => {
+        console.log("An error occurred:", error);
+        // Gérer les erreurs de la requête
+      });
+  });
 
-document.addEventListener("click", (event) => {
+  return Promise.all(deletePromises);
+};
+
+function afficherImage(event) {
+  const fichier = event.target.files[0];
+  const reader = new FileReader();
+
+  reader.onload = function (e) {
+    const image = document.createElement("img");
+    image.src = e.target.result;
+    image.classList.add("image-ajoutee");
+
+    const ajoutPhoto = document.querySelector(".ajoutPhoto");
+
+    document.querySelector(".galery-photo").style.display = "none";
+    document.querySelector(".btn-photo").style.display = "none";
+    document.querySelector(".format").style.display = "none";
+    ajoutPhoto.appendChild(image);
+
+    ajoutPhoto.style.maxHeight = "200px";
+    image.style.maxHeight = "200px";
+    ajoutPhoto.style.display = "flex";
+    ajoutPhoto.style.justifyContent = "center";
+    ajoutPhoto.style.padding = "0";
+    image.style.width = "auto";
+    image.style.height = "100%";
+    image.style.objectFit = "cover";
+
+    imgPath = e.target.result;
+  };
+
+  reader.readAsDataURL(fichier);
+}
+
+document.addEventListener("click", async (event) => {
   if (event.target.classList.contains("ajouter")) {
-    initialEditContent = edit.innerHTML; // Sauvegarder le contenu initial de edit
+    initialEditContent = edit.innerHTML;
 
     edit.innerHTML = `
-    <img id='arrow' onclick='arrowReturn()' src="./assets/icons/arrow-left-solid.svg">
-    <img onclick="bon()" src="./assets/icons/xmark-solid.svg" id="iconClose">
-    <h3>Ajout photo</h3>
-    <form>
-    <div class='ajoutPhoto'>
-    <span class='galery-photo'>
-    <i class="fa-regular fa-image"></i>
-    </span>
-    <label class='btn-photo' for='btn-photo'><i class="fa-solid fa-plus"></i> Ajouter photo</label>
-    <input id='btn-photo' type='file' accept="image/png, image/jpeg" style='display:none;'>
-    <p class='format'>jpg png : 4mo max</p>
-    </div>
-    <label for='titre'>Titre</label>
-    <input id='titre' type='text'>
-    <label for='categorie'>Catégorie</label>
-    <select id="categorie">
-    <option value=""> </option>
-    <option value="Objets">Objets</option>
-    <option value="Appartements">Appartements</option>
-    <option value="Hotels & restaurants">Hotels & restaurants</option>
-</select>
-<input class='submit' type="submit" value="Valider">
-</form>
+      <img id='arrow' onclick='arrowReturn()' src="./assets/icons/arrow-left-solid.svg">
+      <img onclick="bon()" src="./assets/icons/xmark-solid.svg" id="iconClose">
+      <h3>Ajout photo</h3>
+      <form id="addForm">
+        <div class='ajoutPhoto'>
+          <span class='galery-photo'>
+            <i class="fa-regular fa-image"></i>
+          </span>
+          <label class='btn-photo' for='btnPhoto'><i class="fa-solid fa-plus"></i> Ajouter photo</label>
+          <input id='btnPhoto' name='image' type='file' accept="image/png, image/jpeg" style='display:none;'>
+          
+          <p class='format'>jpg png : 4mo max</p>
+        </div>
+        <label for='titre'>Titre</label>
+        <input id='titre' name='title' type='text'>
+        <label for='categorie'>Catégorie</label>
+        <select id="categorie" name='category'>
+          <option value=""> </option>
+          <option value="1">Objets</option>
+          <option value="2">Appartements</option>
+          <option value="3">Hotels & restaurants</option>
+        </select>
+        <input class='submit' type="submit" value="Valider">
+      </form>
     `;
+
+    const addForm = document.getElementById("addForm");
+
+    const submitForm = () => {
+      return new Promise((resolve, reject) => {
+        addForm.addEventListener("submit", (event) => {
+          event.preventDefault();
+
+          const titre = document.getElementById("titre").value;
+          const categorie = document.getElementById("categorie").value;
+          const image = btnPhoto.files[0];
+          const formData = new FormData();
+          formData.append("image", image);
+          formData.append("title", titre);
+          formData.append("category", Number(categorie));
+
+          fetch("http://localhost:5678/api/works", {
+            method: "POST",
+            headers: {
+              Authorization: "Bearer " + token,
+            },
+            body: formData,
+          })
+            .then((response) => {
+              if (response.ok) {
+                console.log("Data sent successfully!");
+                edit.style.display = "none";
+                resolve();
+              } else {
+                console.log("Error sending data.");
+                console.log(formData);
+                reject("Error sending data.");
+              }
+            })
+            .catch((error) => {
+              console.log("An error occurred:", error);
+              reject(error);
+            });
+        });
+      });
+    };
+
+    const submitBtn = document.querySelector(".submit");
+
+    btnPhoto.addEventListener("change", afficherImage);
+    titre.addEventListener("input", verifierFormulaire);
+    categorie.addEventListener("change", verifierFormulaire);
+    verifierFormulaire();
+
+    try {
+      await submitForm();
+      const submitBtn = document.querySelector(".submit");
+      submitBtn.addEventListener("click", (event) => {
+        if (submitBtn.classList.contains("unlock")) {
+          event.preventDefault();
+        }
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }
 });
 
+function verifierFormulaire() {
+  const titre = document.getElementById("titre");
+  const categorie = document.getElementById("categorie");
+  const submitBtn = document.querySelector(".submit");
+
+  if (
+    document.querySelector(".image-ajoutee") !== null &&
+    titre.value !== "" &&
+    categorie.value !== ""
+  ) {
+    submitBtn.classList.remove("unlock");
+  } else {
+    submitBtn.classList.add("unlock");
+  }
+}
+
 async function getWork() {
-  const response = await fetch("http://localhost:5678/api/works");
-  const jsonData = await response.json();
-  return jsonData;
+  try {
+    const response = await fetch("http://localhost:5678/api/works");
+    const jsonData = await response.json();
+    return jsonData;
+  } catch (error) {
+    throw new Error("Failed to fetch work data");
+  }
 }
 
 getWork()
@@ -75,12 +247,18 @@ getWork()
 
     var editContainerHTML = work
       .map(
-        (e, index) => `
+        (e, index) =>
+          `
         <div class='card-edit'>
         <img width='80' src=${e.imageUrl} alt=${e.title}>
+        <div>
+        <img width='80' class='supp-img' id=${e.id} src='./assets/icons/trash-svgrepo-com.svg' alt='supprimer'>
+        </div>
         <p>éditer</p>
       </div>
-        `
+        ` +
+          allId.push(e.id) +
+          console.log(allId)
       )
       .join("");
 
@@ -126,41 +304,25 @@ radio.forEach((label) => {
   });
 });
 
-premium.addEventListener("click", () => {
-  body.classList.add("overlay");
-  edit.style.display = "block";
-});
+const premium = document.getElementById("premium");
+if (premium) {
+  premium.addEventListener("click", () => {
+    body.classList.add("overlay");
+    edit.style.display = "block";
 
-const bon = () => {
+    const suppWork = document.querySelectorAll(".supp-img");
+    suppWork.forEach((element) => {
+      element.addEventListener("click", (event) => {
+        const id = event.target.id;
+        deleteWork(id);
+      });
+    });
+    const suppAll = document.querySelector("supprimer");
+    deleteWorkAll(allId);
+  });
+}
+
+const overlay = document.querySelector(".overlay");
+overlay.addEventListener("click", () => {
   body.classList.remove("overlay");
-  edit.innerHTML = initialEditContent; // Restaurer le contenu initial de edit
-  edit.style.display = "none";
-};
-const arrowReturn = () => {
-  console.log("rr");
-  edit.innerHTML = initialEditContent;
-};
-
-// const data = {
-//   // Les données que vous souhaitez ajouter
-// };
-
-// try {
-//   const response = await fetch("http://localhost:5678/api/works", {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify(data),
-//   });
-
-//   if (response.ok) {
-//     // La requête a réussi et les données ont été ajoutées à la base de données
-//     console.log("Données ajoutées avec succès !");
-//   } else {
-//     // La requête a échoué
-//     console.log("Erreur lors de l'ajout des données à la base de données");
-//   }
-// } catch (error) {
-//   console.log("Une erreur s'est produite lors de la requête :", error);
-// }
+});
