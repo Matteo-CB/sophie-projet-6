@@ -6,7 +6,7 @@ const edit = document.querySelector(".edit");
 const body = document.querySelector("body");
 const editContainer = document.querySelector(".edit-container");
 const token = localStorage.getItem("token");
-const portofolioTitle = document.querySelector('portofolio-title')
+const portofolioTitle = document.querySelector("portofolio-title");
 var allId = [];
 let selectedFilter;
 let imgPath;
@@ -15,8 +15,8 @@ let initialEditContent;
 
 const bon = () => {
   body.classList.remove("overlay");
-  const ecran = document.querySelector('.ecran')
-  ecran.style.display='none'
+  const ecran = document.querySelector(".ecran");
+  ecran.style.display = "none";
   edit.style.display = "none";
 };
 
@@ -37,7 +37,7 @@ const deleteWork = (id) => {
   fetch(`http://localhost:5678/api/works/${id}`, {
     method: "DELETE",
     headers: {
-      Authorization: "Bearer " + token,
+      Authorization: "bearer " + token,
     },
   })
     .then((response) => {
@@ -59,8 +59,8 @@ const deleteWorkAll = (ids) => {
     return fetch(`http://localhost:5678/api/works/${id}`, {
       method: "DELETE",
       headers: {
-        Authorization: "Bearer " + token,
-      },
+        Authorization: 'bearer '+token
+      }
     })
       .then((response) => {
         if (response.ok) {
@@ -159,8 +159,8 @@ document.addEventListener("click", async (event) => {
 
           fetch("http://localhost:5678/api/works", {
             method: "POST",
-            headers: {
-              Authorization: "Bearer " + token,
+            headers:{
+              Authorization:'bearer '+ token
             },
             body: formData,
           })
@@ -305,13 +305,9 @@ radio.forEach((label) => {
   });
 });
 
-
 const premium = document.getElementById("premium");
 if (premium) {
   premium.addEventListener("click", () => {
-    
-    
-
     const suppAll = document.querySelector(".supprimer");
     if (suppAll) {
       suppAll.addEventListener("click", () => {
@@ -333,8 +329,8 @@ if (premium) {
     }
     body.classList.add("overlay");
     edit.style.display = "block";
-    const ecran = document.querySelector('.ecran')
-    ecran.style.display='block'
+    const ecran = document.querySelector(".ecran");
+    ecran.style.display = "block";
     const suppWork = document.querySelectorAll(".supp-img");
     suppWork.forEach((element) => {
       element.addEventListener("click", (event) => {
@@ -344,5 +340,3 @@ if (premium) {
     });
   });
 }
-
-
