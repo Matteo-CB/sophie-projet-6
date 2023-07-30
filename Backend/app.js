@@ -13,7 +13,6 @@ app.use(express.urlencoded({ extended: true }))
 app.use(helmet({
       crossOriginResourcePolicy: false,
     }));
-    
 app.use('/images', express.static(path.join(__dirname, 'images')))
 
 const db = require("./models");

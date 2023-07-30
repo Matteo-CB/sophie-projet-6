@@ -15,11 +15,11 @@ table, caption, tbody, tfoot, thead, tr, th, td,
 article, aside, canvas, details, embed,
 figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+time, mark, audio, video, textarea {
+	resize: none;
 	margin: 0;
 	padding: 0;
 	border: 0;
-	resize: none;
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
@@ -49,10 +49,13 @@ table {
 }
 /** end reset css**/
 body {
-	max-width: 1140px;
-	margin:auto;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
+	background: white;
+}
+.container{
+	max-width: 1140px;
+margin: 0 auto;
 }
 header {
 	display: flex;
@@ -83,7 +86,26 @@ h2{
 	font-family: 'Syne';
 	font-weight: 700;
 	font-size: 30px;
-	color: #1D6154
+	color: #1D6154;
+}
+.if_admin{
+	display: flex;
+	align-items: center;
+	gap: 5px;
+	cursor: pointer;
+	display: none;
+
+}
+.admin .if_admin{
+	display:block;
+
+}
+.port-title{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+	margin-bottom: 1em;
 }
 nav ul {
 	display: flex;
@@ -102,7 +124,6 @@ li:hover {
 #introduction {
 	display: flex;
 	align-items: center;
-	padding-bottom: 8cd b	0px;
 }
 #introduction figure {
 	flex: 1
@@ -111,18 +132,6 @@ li:hover {
 	display: block;
 	margin: auto;
 	width: 80%;
-}
-.ecran{
-	z-index: 655656565656565685;
-	display: none;
-	padding: 0;
-	margin: 0;
-	padding: 555555555;
-	width: 100vh!important;
-	position: absolute;
-	top: 1;
-	background:transparent;
-	height: 55000vh;
 }
 
 #introduction article {
@@ -137,7 +146,6 @@ li:hover {
 }
 #portfolio h2 {
 	text-align: center;
-	margin-bottom: 1em;
 }
 .gallery {
 	width: 100%;
@@ -162,27 +170,29 @@ margin: auto;
 #contact h2{
 	margin-bottom: 20px;
 }
-#contact form {
+#contact form, .form-login {
 	text-align: left;
 	margin-top:30px;
 	display: flex;
 	flex-direction: column;
 }
 
-#contact input {
+#contact input, .form-login input {
 	height: 50px;
 	font-size: 1.2em;
 	border: none;
-	box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
-#contact label {
+#contact label, .form-login label {
 	margin: 2em 0 1em 0;
 }
 #contact textarea {
 	border: none;
-	box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
-
+#portfolio label{
+	cursor: pointer;
+}
 input[type="submit"]{
 	font-family: 'Syne';
 	font-weight: 700;
@@ -192,266 +202,69 @@ input[type="submit"]{
 	width: 180px;
 	text-align: center;
 	border-radius: 60px ;
-	outline: none;
-	border: none;
+}
+.form-login{
+	width: 50%;
+	margin: 0 auto 30px auto;
+	min-width: 400px;
 
 }
-.unlock{
-	background: grey!important;
+.main-login h2{
+	text-align: center;
 }
-
+.form-login a{
+	text-decoration: underline;
+	text-align: center;
+}
 footer nav ul {
 	display: flex;
 	justify-content: flex-end;
 	margin: 2em
 }
 
-label:not(.label-login, .label-contact){
-	font-family: 'Syne';
-	font-weight: 700;
-	color: #1D6154;
-	background-color: white;
-	border: 1px solid #1D6154;
-	padding: 10px;
-	margin : 2em auto ;
-	width: 180px;
-	text-align: center;
-	border-radius: 60px ;
-}
-
-input[type="radio"]:checked + label {
-	color: white;
-	background-color: #1D6154;
-  }
-
-  input[type="radio"]{
-	display: none;
-  }
-.filtres-container{
+#filtre{
 	display: flex;
-	align-items: center;
-	gap: 10px;
-	width: 80%;
-	margin: 0 auto;
-}
+	justify-content: center;
 
+}
 a{
+	color: inherit;
 	text-decoration: none;
-	color: inherit;
 }
-#login h2{
-	text-align: center;
-	padding: 10px;
-}
-
-#login input[type="submit"]{
-	padding: 5px;
-}
-
-#login p{
-	text-align: center;
-	color: red;
-}
-
-form{
-	width: 70%;
-	margin: 0 auto;
-	display: flex;
-	flex-direction: column;
-	gap: 10px;
-}
-
-.mdp-oublie{
-	text-align: center;
-	text-decoration: underline;
-}
-
-.portofolio-title{
-	display: flex;
-	justify-content: center;
-	align-items: center;
-
-	gap: 10px;
-}
-.portofolio-title p{
-	cursor: pointer;
-	transform: translateY(-100%);
-}
-.edit{
+.filtreRadio{
 	display: none;
-	background: white;
-	width: 800px;
-	height: 650px;
-	top: 50%;
-	transform: translateY(-50%);
-	position: fixed;
-	z-index: 99999999111;
 }
-#iconClose{
-	z-index: 9999999;
-	position:absolute;
-	display: inline-block;
-cursor: pointer;
-	top: 10px;
-	right: 10px;
-	width: 15px;
-}
-#arrow{
-	z-index: 9999999;
-	position:absolute;
-	display: inline-block;
-cursor: pointer;
-	top: 10px;
-	left: 10px;
-	width: 15px;
-}
-
-  .overlay{
-	overflow: hidden;
-	
-  }
-  .overlay::after {
-	content: "";
-	position: absolute;
-	background: #0000004a;
-	width: 200vw;
-	margin-left: -500px;
-	height: 450vh;
-	z-index: 54454;
-	top: 0;
-  }
-  .edit h3{
-	text-align: center;
-	font-size: 1.2rem;
-	margin: 25px 0 0 0;
-  }
- .edit-container{
-	display: flex;
-	flex-wrap: wrap;
-	position: relative;
-	width: 70%;
-	margin: 10px auto;
- }
- .edit-container img{
-	padding: 0 5px;
- }
- .edit-container p{
-	cursor: pointer;
-	margin: 25px 0 0 0;
-	font-size: 0.8rem;
- }
- .edit-container::after{
-	content: "";
-	position: absolute;
-	background: #00000041;
-	height: 1px;
-	width: 100%;
-	bottom: -20px;
-	left: 0;
- }
- .edit .ajouter{
-	font-family: 'Syne';
-	font-weight: 700;
-	color: white;
-	background-color: #1D6154;
-	border: 1px solid #1D6154;
-	padding: 5px;
-	margin : 60px auto 0 auto ;
-	width: 180px;
-	text-align: center;
-	border-radius: 60px ;
- }
-
- .supprimer{
-	color: #D65353;
-	text-align: center;
- }
-
-
- #premium{
-	display: none;
- }
- .ajoutPhoto{
-	background: #e8f1f6;
-	width: 100%;
-	margin: 15px auto 5px auto;
-	padding: 100px 0;
-	position: relative;
- }
-.edit label{
-	border: inherit;
-	text-align: left;
-	color: inherit;
-	font-family: inherit;
-	padding: 10px 0;
-	margin: 5px 0 0 0;
-}
-
-.edit form input, .edit form select{
-	height: 50px;
-	font-size: 1.2em;
-	border: none;
-	box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
-	
-	
-}
-
- .edit form input:focus, .edit form select:focus{
-	outline: 1px solid rgba(0, 0, 0, 0.566);
-}
-.format{
-	position: absolute;
-	bottom: 10px;
-	left: 50%;
-	transform: translateX(-50%)!important;
-}
-.btn-photo{
-	position: absolute;
-	top: 70%;
-	left: 50%;
-	transform: translate(-50%,-50%)!important;
-	width: min-content;
-	white-space: nowrap;
-	color: #1D6154!important;
-	background: rgba(109, 123, 109, 0.32)!important;
-	padding: 10px 40px;
-	text-align: center!important;
+.labelFiltre{
 	border-radius: 30px;
-	cursor: pointer;
-}
-.ajoutPhoto p{
-	margin:0 auto;
-	width: min-content;
-	white-space: nowrap;
-}
+margin: 20px 10px;
+	border: 1px solid #1D6154;
+	color: #1D6154;
+	padding: 10px;
 
-.galery-photo{
-	
+}
+.filtreRadio:checked + .labelFiltre{
+
+	background: #1D6154;
+	color: white;
+}
+.modal-screen{
 	position: absolute;
-	top: 20px;
+	width: 100%;
+	height: 300vh;
+	top: -50px;
+	z-index: -50;
+	visibility: hidden;
+	background: #0000001a;
+}
+.modal{
+	position:fixed;
+	z-index: -100;
+	visibility: hidden;
+	transform: translate(-50%, -50%);
+	width: 60%;
+	border-radius:10px;
+	height: 90%;
+	top: 50%;
 	left: 50%;
-	transform: translateX(-50%);
-}
-.galery-photo i {
-	font-size: 4rem;
-	color: rgba(128, 128, 128, 0.628);
-}
-.card-edit{
-	position: relative;
-}
-.card-edit div{
-	top: 3px;
-	right: 9px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	position: absolute;
-	background: #000;
-	width: 30px;
-	border-radius: 10px;
-	height: 30px;
-}
-.supp-img{
-	width: 15px;
-	cursor: pointer;
+	background: white;
 }
