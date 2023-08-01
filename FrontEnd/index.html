@@ -1,18 +1,33 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
 	<meta charset="UTF-8">
 	<title>Sophie Bluel - Architecte d'intérieur</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
+		rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
 	<script defer src="./script.js"></script>
 </head>
+
 <body>
-	<div class="modal"></div>
+	<div class="modal">
+		<img width="20" class="close" src="./assets/icons/multiply-svgrepo-com.svg" alt="fermer le modal"
+			onclick="closeModal()">
+		<h1>Galerie photo</h1>
+		<div class="gallery-modal">
+
+		</div>
+		<div class="btn-modal">
+
+			<p class="ajouter-btn" onclick="openAddPic()">Ajouter une photo</p>
+			<p class="supprimer-galerie">Supprimer la galerie</p>
+		</div>
+	</div>
 	<div class="modal-screen"></div>
 	<div class="container">
 
@@ -34,15 +49,21 @@
 				</figure>
 				<article>
 					<h2>Designer d'espace</h2>
-					<p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la livraison finale du chantier.</p>
-					<p>Chaque projet sera étudié en commun, de façon à mettre en valeur les volumes, les matières et les couleurs dans le respect de l’esprit des lieux et le choix adapté des matériaux. Le suivi du chantier sera assuré dans le souci du détail, le respect du planning et du budget.</p>
-					<p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG, décorateur(trice)</p>
+					<p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la
+						livraison finale du chantier.</p>
+					<p>Chaque projet sera étudié en commun, de façon à mettre en valeur les volumes, les matières et les
+						couleurs dans le respect de l’esprit des lieux et le choix adapté des matériaux. Le suivi du
+						chantier sera assuré dans le souci du détail, le respect du planning et du budget.</p>
+					<p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG,
+						décorateur(trice)</p>
 				</article>
 			</section>
 			<section id="portfolio">
 				<div class="port-title">
-		
-					<h2>Mes Projets</h2><p class="if_admin"><img width="10" src="./assets/icons/pen-to-square-svgrepo-com.svg" alt="icon modifier"> modifier</p>
+
+					<h2>Mes Projets</h2>
+					<p class="if_admin"><img width="10" src="./assets/icons/pen-to-square-svgrepo-com.svg"
+							alt="icon modifier"> modifier</p>
 				</div>
 				<form class="filtre" id="filtre"></form>
 				<div class="gallery" id="gallery"></div>
@@ -61,7 +82,7 @@
 				</form>
 			</section>
 		</main>
-		
+
 		<footer>
 			<nav>
 				<ul>
@@ -71,4 +92,5 @@
 		</footer>
 	</div>
 </body>
+
 </html>
