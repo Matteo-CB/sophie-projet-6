@@ -29,6 +29,9 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
+#portfolio{
+	margin-top: 110px!important;
+}
 body {
 	line-height: 1;
 }
@@ -194,7 +197,7 @@ margin: auto;
 #portfolio label{
 	cursor: pointer;
 }
-input[type="submit"]{
+input[type="submit"], .submit-p{
 	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
@@ -204,6 +207,7 @@ input[type="submit"]{
 	text-align: center;
 	border-radius: 60px ;
 }
+
 .form-login{
 	width: 50%;
 	margin: 0 auto 30px auto;
@@ -335,10 +339,11 @@ margin: 20px 10px;
 	background: #e8f1f6;
 	width: 90%;
 	margin: 0 auto;
-	padding: 10px;
+	
 }
-.menu-ajout-photo img{
+.menu-ajout-photo .img{
 	margin: 10px 0;
+	padding-top: 10px;
 }
 .menu-ajout-photo label{
 	cursor: pointer;
@@ -349,6 +354,9 @@ margin: 20px 10px;
 	margin: 10px 0;
 	padding: 10px 30px;
 	border-radius: 25px;
+}
+.menu-ajout-photo p {
+	padding-bottom: 10px;
 }
 .content-modal-add{
 	padding: 20px 0;
@@ -366,7 +374,7 @@ position: relative;
 .content-modal-add label input,.content-modal-add label select{
 	margin: 10px 0;
 }
-.modal input[type='submit']{
+.modal input[type='submit'], .submit-p{
 display: block;
 padding: 10px 40px;
 border: none;
@@ -376,7 +384,9 @@ cursor: pointer;
 .lock{
 	background: #a7a7a7!important;
 	cursor: not-allowed !important;
+	
 }
+
 .content-modal-add::after{
 	content: '';
 	width: 80%;
@@ -386,4 +396,25 @@ cursor: pointer;
 	left: 50%;
 	transform: translateX(-50%);
 	background: #b3b3b3;
+}
+.gallery-modal-card{
+	position: relative;
+}
+.trash{
+	cursor: pointer;
+	background: #000;
+	padding: 3px;
+	z-index: 999999999999999999999999;
+	top: 3px;
+	right: 3px;
+	border-radius: 5px;
+	width: 20px;
+	height: 20px;
+	position: absolute;
+}
+.submit-photo{
+
+}
+.submit-p{
+
 }
