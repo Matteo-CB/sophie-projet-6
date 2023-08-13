@@ -221,6 +221,12 @@ input[type="submit"], .submit-p{
 	text-decoration: underline;
 	text-align: center;
 }
+.text-error{
+	color: red;
+	text-align: center;
+	margin: 25px 0;
+	visibility: hidden;
+}
 footer nav ul {
 	display: flex;
 	justify-content: flex-end;

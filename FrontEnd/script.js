@@ -295,8 +295,31 @@ async function fetchLogin() {
   })
     .then((e) => e.json())
     .then((e) => {
-      localStorage.setItem("token", e.token);
-      localStorage.setItem("userId", e.userId);
+      if (
+        reqFormLogin.email == "sophie.bluel@test.tld" &&
+        reqFormLogin.password == "S0phie"
+      ) {
+        localStorage.setItem("token", e.token);
+        localStorage.setItem("userId", e.userId);
+        localStorage.setItem("isLoggedIn", "true");
+        window.location = "./index.html#portfolio";
+      } else {
+        console.log(reqFormLogin);
+        const textError = document.querySelector(".text-error");
+        textError.style.visibility = "visible";
+        setTimeout(() => {
+          textError.style.visibility = "hidden";
+        }, 2000);
+      }
+    })
+
+    .catch((error) => {
+      console.log(error);
+      const textError = document.querySelector(".text-error");
+      textError.style.visibility = "visible";
+      setTimeout(() => {
+        textError.style.visibility = "hidden";
+      }, 2000);
     });
 }
 
@@ -307,11 +330,6 @@ if (formLogin) {
       email: e.target[0].value,
       password: e.target[1].value,
     };
-    fetchLogin()
-      .then((e) => {
-        localStorage.setItem("isLoggedIn", "true");
-        window.location = "./index.html";
-      })
-      .catch((e) => console.log(e));
+    fetchLogin();
   });
 }
